@@ -2,6 +2,8 @@ extends RigidBody2D
 
 class_name Ball
 
+const BALL_SIZE := 30
+
 const INITIAL_SPEED := 250.0
 const SPEED_MULTIPLIER := 1.05
 @export var speed := INITIAL_SPEED

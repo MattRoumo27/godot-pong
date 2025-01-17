@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://fgefsphqduac"]
+[gd_scene load_steps=3 format=3 uid="uid://fgefsphqduac"]
+
+[ext_resource type="Script" path="res://scripts/paddle.gd" id="1_jk0vh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_61f8u"]
 size = Vector2(25, 100)
@@ -6,6 +8,7 @@ size = Vector2(25, 100)
 [node name="Paddle" type="RigidBody2D"]
 rotation = -0.000231997
 gravity_scale = 0.0
+script = ExtResource("1_jk0vh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(12.5, 50)

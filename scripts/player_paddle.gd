@@ -1,6 +1,4 @@
-extends RigidBody2D
-
-const SPEED := 250
+extends Paddle
 
 func _physics_process(delta: float) -> void:
 	move_based_on_player_input(delta)

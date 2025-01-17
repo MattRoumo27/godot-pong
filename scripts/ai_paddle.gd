@@ -1,10 +1,6 @@
-extends RigidBody2D
-
-const SPEED := 250
-const PADDLE_HEIGHT := 100
+extends Paddle
 
 var ball: Ball
-const BALL_SIZE := 30
 @onready var timer: Timer = $Timer
 
 var stop_moving := false
@@ -13,8 +9,8 @@ func _physics_process(delta: float) -> void:
 	move_vertically_towards_ball(delta)
 
 func move_vertically_towards_ball(delta: float):
-	var my_center_y_position := position.y + PADDLE_HEIGHT / 2
-	var ball_center_y := ball.position.y + BALL_SIZE / 2
+	var my_center_y_position := position.y + HEIGHT / 2
+	var ball_center_y := ball.position.y + ball.BALL_SIZE / 2
 	
 	var position_difference := ball_center_y - my_center_y_position
 

@@ -3,7 +3,7 @@ extends RigidBody2D
 class_name Ball
 
 const BALL_SIZE := 30
-const MAX_BOUNCE_ANGLE := PI / 4
+const MAX_BOUNCE_ANGLE := PI / 3
 
 const INITIAL_SPEED := 250.0
 const SPEED_MULTIPLIER := 1.05
@@ -28,17 +28,6 @@ func choose_random_element_from_array(array: Array) -> int:
 	
 	return array[index_of_choice]
 	
-func _process(delta: float) -> void:
-	is_out_of_bounds()
-	
-func is_out_of_bounds() -> bool:
-	var viewport_rect := get_viewport_rect()
-	
-	var out_of_bounds_on_left = position.x < viewport_rect.position.x
-	var out_of_bounds_on_right = position.x > viewport_rect.end.x
-	
-	return out_of_bounds_on_left or out_of_bounds_on_right
-	
 func _physics_process(delta: float) -> void:
 	var motion_vector := direction_vector * speed * delta
 	var collision = move_and_collide(motion_vector)
@@ -62,19 +51,36 @@ func switch_vertical_direction() -> void:
 	direction_vector.y = -direction_vector.y
 	
 func bounce_off_of_paddle(paddle: Paddle) -> void:	
+	var bounce_angle := get_bounce_angle(paddle)
+	var direction_vector_length := direction_vector.length()
+		
+	if moving_to_the_right():
+		bounce_off_of_paddle_to_the_right(bounce_angle)
+	else:
+		bounce_off_of_paddle_to_the_left(bounce_angle)
+		
+func moving_to_the_right() -> bool:
+	return direction_vector.x > 0
+		
+func get_bounce_angle(paddle: Paddle) -> float:
 	var relative_intersect_y := paddle.get_center_y_coordinate() - get_center_y_coordinate()
 	
 	var half_paddle_height := paddle.HEIGHT / 2
 	var normalized_intersection := (relative_intersect_y / half_paddle_height) * ((PI / 2) - MAX_BOUNCE_ANGLE)
 	
-	var bounce_angle = normalized_intersection * MAX_BOUNCE_ANGLE
+	return normalized_intersection * MAX_BOUNCE_ANGLE
 	
-	if direction_vector.x > 0:
-		direction_vector.x = direction_vector.length() * cos(bounce_angle) * -1
-		direction_vector.y = direction_vector.length() * sin(bounce_angle) * -1
-	else:
-		direction_vector.x = direction_vector.length() * cos(bounce_angle)
-		direction_vector.y = direction_vector.length() * -sin(bounce_angle)
+func bounce_off_of_paddle_to_the_right(bounce_angle: float) -> void:
+	var direction_vector_length = direction_vector.length()
+	
+	direction_vector.x = direction_vector_length * -cos(bounce_angle)
+	direction_vector.y = direction_vector_length * -sin(bounce_angle)
+	
+func bounce_off_of_paddle_to_the_left(bounce_angle: float) -> void:
+	var direction_vector_length = direction_vector.length()
+	
+	direction_vector.x = direction_vector_length * cos(bounce_angle)
+	direction_vector.y = direction_vector_length * -sin(bounce_angle)
 	
 func get_center_y_coordinate() -> float:
 	return position.y + BALL_SIZE / 2

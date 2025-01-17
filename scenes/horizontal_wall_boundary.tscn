@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bggynce8x5f88"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_htq8p"]
+
+[node name="HorizontalWallBoundary" type="StaticBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 3.14159
+shape = SubResource("WorldBoundaryShape2D_htq8p")
+one_way_collision = true

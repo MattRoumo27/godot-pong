@@ -1,0 +1,74 @@
+[gd_scene load_steps=9 format=3 uid="uid://6k4omkn55pes"]
+
+[ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_2a1mw"]
+[ext_resource type="PackedScene" uid="uid://fgefsphqduac" path="res://scenes/paddle.tscn" id="2_hwxm4"]
+[ext_resource type="AudioStream" uid="uid://dn3cfkqy6pl78" path="res://assets/sounds/GoalBloop.wav" id="3_8j8ja"]
+[ext_resource type="Script" path="res://scripts/player_paddle.gd" id="3_j1jxa"]
+[ext_resource type="PackedScene" uid="uid://7ioa32x3hn2l" path="res://scenes/ball.tscn" id="4_mu3yx"]
+[ext_resource type="Script" path="res://scenes/ai_paddle.gd" id="4_qahns"]
+[ext_resource type="PackedScene" uid="uid://bggynce8x5f88" path="res://scenes/horizontal_wall_boundary.tscn" id="5_0wpsl"]
+[ext_resource type="PackedScene" uid="uid://byqnii2tbsjdn" path="res://scenes/vertical_wall_boundary.tscn" id="6_cinky"]
+
+[node name="Main" type="Node2D"]
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("1_2a1mw")
+ball_scene = ExtResource("4_mu3yx")
+
+[node name="BallSpawnLocation" type="Node2D" parent="GameManager"]
+position = Vector2(570, 315)
+
+[node name="Player1Score" type="Label" parent="GameManager"]
+offset_left = 153.0
+offset_top = 45.0
+offset_right = 214.0
+offset_bottom = 138.0
+theme_override_font_sizes/font_size = 50
+text = "0"
+
+[node name="Player2Score" type="Label" parent="GameManager"]
+offset_left = 931.0
+offset_top = 45.0
+offset_right = 998.0
+offset_bottom = 126.0
+theme_override_font_sizes/font_size = 50
+text = "0"
+
+[node name="GoalSound" type="AudioStreamPlayer2D" parent="GameManager"]
+stream = ExtResource("3_8j8ja")
+
+[node name="Paddles" type="Node" parent="."]
+
+[node name="PlayerPaddle" parent="Paddles" instance=ExtResource("2_hwxm4")]
+position = Vector2(30, 275)
+script = ExtResource("3_j1jxa")
+
+[node name="AIPaddle" parent="Paddles" instance=ExtResource("2_hwxm4")]
+position = Vector2(1095, 275)
+rotation = 0.00169892
+script = ExtResource("4_qahns")
+
+[node name="Timer" type="Timer" parent="Paddles/AIPaddle"]
+process_callback = 0
+wait_time = 0.05
+one_shot = true
+
+[node name="WallBoundaries" type="Node" parent="."]
+
+[node name="TopWallBoundary" parent="WallBoundaries" instance=ExtResource("5_0wpsl")]
+
+[node name="BottomWallBoundary" parent="WallBoundaries" instance=ExtResource("5_0wpsl")]
+position = Vector2(0, 650)
+rotation = -3.14159
+
+[node name="LeftWallBoundary" parent="WallBoundaries" instance=ExtResource("6_cinky")]
+position = Vector2(-13, 325)
+
+[node name="RightWallBoundary" parent="WallBoundaries" instance=ExtResource("6_cinky")]
+position = Vector2(1163, 325)
+rotation = 3.14159
+
+[connection signal="new_ball_created" from="GameManager" to="Paddles/AIPaddle" method="_on_game_manager_new_ball_created"]
+[connection signal="timeout" from="Paddles/AIPaddle/Timer" to="Paddles/AIPaddle" method="_on_timer_timeout"]
+[connection signal="body_entered" from="WallBoundaries/LeftWallBoundary" to="GameManager" method="_on_left_wall_boundary_body_entered"]
+[connection signal="body_entered" from="WallBoundaries/RightWallBoundary" to="GameManager" method="_on_right_wall_boundary_body_entered"]

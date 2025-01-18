@@ -12,6 +12,7 @@ const PLAYER_1 := "Player1"
 const PLAYER_2 := "Player2"
 
 @onready var goal_sound: AudioStreamPlayer2D = $GoalSound
+@onready var pause_menu: Control = $PauseMenu
 
 func _ready() -> void:
 	create_new_ball()

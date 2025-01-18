@@ -1,19 +1,19 @@
 [gd_scene load_steps=9 format=3 uid="uid://6k4omkn55pes"]
 
-[ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_2a1mw"]
-[ext_resource type="PackedScene" uid="uid://fgefsphqduac" path="res://scenes/paddle.tscn" id="2_hwxm4"]
-[ext_resource type="AudioStream" uid="uid://dn3cfkqy6pl78" path="res://assets/sounds/GoalBloop.wav" id="3_8j8ja"]
-[ext_resource type="Script" path="res://scripts/player_paddle.gd" id="3_j1jxa"]
-[ext_resource type="PackedScene" uid="uid://7ioa32x3hn2l" path="res://scenes/ball.tscn" id="4_mu3yx"]
-[ext_resource type="Script" path="res://scripts/ai_paddle.gd" id="4_qahns"]
-[ext_resource type="PackedScene" uid="uid://bggynce8x5f88" path="res://scenes/horizontal_wall_boundary.tscn" id="5_0wpsl"]
-[ext_resource type="PackedScene" uid="uid://byqnii2tbsjdn" path="res://scenes/vertical_wall_boundary.tscn" id="6_cinky"]
+[ext_resource type="Script" path="res://scripts/game/game_manager.gd" id="1_bwadl"]
+[ext_resource type="PackedScene" uid="uid://7ioa32x3hn2l" path="res://scenes/game/ball.tscn" id="2_uqbwy"]
+[ext_resource type="AudioStream" uid="uid://dn3cfkqy6pl78" path="res://assets/sounds/GoalBloop.wav" id="3_dgkdk"]
+[ext_resource type="PackedScene" uid="uid://fgefsphqduac" path="res://scenes/game/paddle.tscn" id="4_imumm"]
+[ext_resource type="Script" path="res://scripts/game/paddles/player_paddle.gd" id="5_oe6qh"]
+[ext_resource type="Script" path="res://scripts/game/paddles/ai_paddle.gd" id="6_oq733"]
+[ext_resource type="PackedScene" uid="uid://bggynce8x5f88" path="res://scenes/game/walls/horizontal_wall_boundary.tscn" id="7_i73e8"]
+[ext_resource type="PackedScene" uid="uid://byqnii2tbsjdn" path="res://scenes/game/walls/vertical_wall_boundary.tscn" id="8_o2af8"]
 
 [node name="Main" type="Node2D"]
 
 [node name="GameManager" type="Node" parent="."]
-script = ExtResource("1_2a1mw")
-ball_scene = ExtResource("4_mu3yx")
+script = ExtResource("1_bwadl")
+ball_scene = ExtResource("2_uqbwy")
 
 [node name="BallSpawnLocation" type="Node2D" parent="GameManager"]
 position = Vector2(570, 315)
@@ -35,18 +35,18 @@ theme_override_font_sizes/font_size = 50
 text = "0"
 
 [node name="GoalSound" type="AudioStreamPlayer2D" parent="GameManager"]
-stream = ExtResource("3_8j8ja")
+stream = ExtResource("3_dgkdk")
 
 [node name="Paddles" type="Node" parent="."]
 
-[node name="PlayerPaddle" parent="Paddles" instance=ExtResource("2_hwxm4")]
+[node name="PlayerPaddle" parent="Paddles" instance=ExtResource("4_imumm")]
 position = Vector2(30, 275)
-script = ExtResource("3_j1jxa")
+script = ExtResource("5_oe6qh")
 
-[node name="AIPaddle" parent="Paddles" instance=ExtResource("2_hwxm4")]
+[node name="AIPaddle" parent="Paddles" instance=ExtResource("4_imumm")]
 position = Vector2(1095, 275)
 rotation = 0.00169892
-script = ExtResource("4_qahns")
+script = ExtResource("6_oq733")
 
 [node name="Timer" type="Timer" parent="Paddles/AIPaddle"]
 process_callback = 0
@@ -55,16 +55,16 @@ one_shot = true
 
 [node name="WallBoundaries" type="Node" parent="."]
 
-[node name="TopWallBoundary" parent="WallBoundaries" instance=ExtResource("5_0wpsl")]
+[node name="TopWallBoundary" parent="WallBoundaries" instance=ExtResource("7_i73e8")]
 
-[node name="BottomWallBoundary" parent="WallBoundaries" instance=ExtResource("5_0wpsl")]
+[node name="BottomWallBoundary" parent="WallBoundaries" instance=ExtResource("7_i73e8")]
 position = Vector2(0, 650)
 rotation = -3.14159
 
-[node name="LeftWallBoundary" parent="WallBoundaries" instance=ExtResource("6_cinky")]
+[node name="LeftWallBoundary" parent="WallBoundaries" instance=ExtResource("8_o2af8")]
 position = Vector2(-13, 325)
 
-[node name="RightWallBoundary" parent="WallBoundaries" instance=ExtResource("6_cinky")]
+[node name="RightWallBoundary" parent="WallBoundaries" instance=ExtResource("8_o2af8")]
 position = Vector2(1163, 325)
 rotation = 3.14159
 

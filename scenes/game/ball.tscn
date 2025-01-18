@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://7ioa32x3hn2l"]
 
-[ext_resource type="Script" path="res://scripts/ball.gd" id="1_3xg04"]
-[ext_resource type="AudioStream" uid="uid://b36q3mo4fuveo" path="res://assets/sounds/HitPaddleBloop.wav" id="2_dgv3e"]
-[ext_resource type="AudioStream" uid="uid://dt11fcvq4eu2c" path="res://assets/sounds/WallBloop.wav" id="3_u1yv6"]
+[ext_resource type="Script" path="res://scripts/game/ball.gd" id="1_d1dhy"]
+[ext_resource type="AudioStream" uid="uid://b36q3mo4fuveo" path="res://assets/sounds/HitPaddleBloop.wav" id="2_h81kh"]
+[ext_resource type="AudioStream" uid="uid://dt11fcvq4eu2c" path="res://assets/sounds/WallBloop.wav" id="3_qxu42"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qtv5h"]
 size = Vector2(15, 15)
@@ -11,7 +11,7 @@ size = Vector2(15, 15)
 gravity_scale = 0.0
 contact_monitor = true
 max_contacts_reported = 20
-script = ExtResource("1_3xg04")
+script = ExtResource("1_d1dhy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(7.5, 7.5)
@@ -21,7 +21,7 @@ shape = SubResource("RectangleShape2D_qtv5h")
 polygon = PackedVector2Array(0, 0, 15, 0, 15, 15, 0, 15)
 
 [node name="HitPaddleSound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("2_dgv3e")
+stream = ExtResource("2_h81kh")
 
 [node name="HitWallSound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_u1yv6")
+stream = ExtResource("3_qxu42")

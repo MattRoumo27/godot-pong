@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bggynce8x5f88" path="res://scenes/game/walls/horizontal_wall_boundary.tscn" id="7_i73e8"]
 [ext_resource type="PackedScene" uid="uid://byqnii2tbsjdn" path="res://scenes/game/walls/vertical_wall_boundary.tscn" id="8_o2af8"]
 
-[node name="Main" type="Node2D"]
+[node name="Game" type="Node2D"]
 
 [node name="GameManager" type="Node" parent="."]
 script = ExtResource("1_bwadl")

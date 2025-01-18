@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://mbkq6xj5avur"]
+[gd_scene load_steps=3 format=3 uid="uid://mbkq6xj5avur"]
 
 [ext_resource type="Script" path="res://scripts/menus/pause_menu.gd" id="1_kw64n"]
+[ext_resource type="PackedScene" uid="uid://coddyuc13egi1" path="res://scenes/menus/quit_button.tscn" id="2_gg07c"]
 
 [node name="PauseMenu" type="Control"]
 process_mode = 3
@@ -36,5 +37,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 40
 text = "Resume"
+
+[node name="QuitButton" parent="." instance=ExtResource("2_gg07c")]
+layout_mode = 1
+offset_top = 101.0
+offset_bottom = 179.0
+quit_procedure = 0
 
 [connection signal="button_up" from="ResumeButton" to="." method="_on_resume_button_button_up"]

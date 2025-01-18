@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dyoqcskm4x285"]
+[gd_scene load_steps=4 format=3 uid="uid://dyoqcskm4x285"]
 
 [ext_resource type="Script" path="res://scripts/menus/play_button.gd" id="1_aa1ag"]
 [ext_resource type="PackedScene" uid="uid://6k4omkn55pes" path="res://scenes/game/game.tscn" id="2_q3j0e"]
+[ext_resource type="PackedScene" uid="uid://coddyuc13egi1" path="res://scenes/menus/quit_button.tscn" id="3_4ah3o"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -10,23 +11,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="PlayButton" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -136.5
-offset_top = -56.0
-offset_right = 136.5
-offset_bottom = 56.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Play"
-script = ExtResource("1_aa1ag")
-game_scene = ExtResource("2_q3j0e")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
@@ -45,5 +29,30 @@ theme_override_font_sizes/font_size = 50
 text = "PONG"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="PlayButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -136.5
+offset_top = -56.0
+offset_right = 136.5
+offset_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "Play"
+script = ExtResource("1_aa1ag")
+game_scene = ExtResource("2_q3j0e")
+
+[node name="QuitButton" parent="." instance=ExtResource("3_4ah3o")]
+layout_mode = 1
+offset_left = -104.0
+offset_top = 88.0
+offset_right = 96.0
+offset_bottom = 166.0
 
 [connection signal="button_up" from="PlayButton" to="PlayButton" method="_on_button_up"]

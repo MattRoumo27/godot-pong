@@ -10,7 +10,6 @@ const SPEED_MULTIPLIER := 1.05
 @export var speed := INITIAL_SPEED
 
 var direction_vector: Vector2
-signal ball_went_out_bounds
 
 @onready var hit_paddle_sound: AudioStreamPlayer2D = $HitPaddleSound
 @onready var hit_wall_sound: AudioStreamPlayer2D = $HitWallSound

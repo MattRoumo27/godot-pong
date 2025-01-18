@@ -3,6 +3,7 @@
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_htq8p"]
 
 [node name="HorizontalWallBoundary" type="StaticBody2D"]
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 3.14159

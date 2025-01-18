@@ -54,5 +54,5 @@ func update_score_labels():
 	player_2_score.text = str(scores[PLAYER_2])
 
 func reset_ball(ball: Ball):
-	create_new_ball()
+	call_deferred('create_new_ball')
 	ball.queue_free()

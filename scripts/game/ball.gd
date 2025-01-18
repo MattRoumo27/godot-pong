@@ -2,7 +2,7 @@ extends RigidBody2D
 
 class_name Ball
 
-const BALL_SIZE := 30
+const BALL_SIZE := 30.0
 const MAX_BOUNCE_ANGLE := PI / 3
 
 const INITIAL_SPEED := 250.0
@@ -51,7 +51,6 @@ func switch_vertical_direction() -> void:
 	
 func bounce_off_of_paddle(paddle: Paddle) -> void:	
 	var bounce_angle := get_bounce_angle(paddle)
-	var direction_vector_length := direction_vector.length()
 		
 	if moving_to_the_right():
 		bounce_off_of_paddle_to_the_right(bounce_angle)

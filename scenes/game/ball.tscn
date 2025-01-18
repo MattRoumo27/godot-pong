@@ -8,6 +8,7 @@
 size = Vector2(15, 15)
 
 [node name="Ball" type="RigidBody2D"]
+collision_mask = 3
 gravity_scale = 0.0
 contact_monitor = true
 max_contacts_reported = 20

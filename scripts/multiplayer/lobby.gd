@@ -20,23 +20,23 @@ var number_of_players_loaded := 0
 
 
 func _ready() -> void:
-	connect_peer_signals()
-	connect_connection_signals()
-	connect_server_signals()
+	_connect_peer_signals()
+	_connect_connection_signals()
+	_connect_server_signals()
 	
 
-func connect_peer_signals() -> void:
-	multiplayer.peer_connected.connect(on_player_connected)
-	multiplayer.peer_disconnected.connect(on_player_disconnected)
+func _connect_peer_signals() -> void:
+	multiplayer.peer_connected.connect(_on_player_connected)
+	multiplayer.peer_disconnected.connect(_on_player_disconnected)
 
 
-func connect_connection_signals() -> void:
-	multiplayer.connected_to_server.connect(on_connected_ok)
-	multiplayer.connection_failed.connect(on_connected_fail)
+func _connect_connection_signals() -> void:
+	multiplayer.connected_to_server.connect(_on_connected_ok)
+	multiplayer.connection_failed.connect(_on_connected_fail)
 
 
-func connect_server_signals() -> void:
-	multiplayer.server_disconnected.connect(on_server_disconnected)
+func _connect_server_signals() -> void:
+	multiplayer.server_disconnected.connect(_on_server_disconnected)
 
 func join_game(address = ""):
 	if address.is_empty():
@@ -75,31 +75,31 @@ func player_loaded() -> void:
 
 # When a peer connects, send them my player info.
 # This allows transfer of all desired data for each player, not only the unique ID.
-func on_player_connected(id: int) -> void:
-	register_player.rpc_id(id, player_info)
+func _on_player_connected(id: int) -> void:
+	_register_player.rpc_id(id, player_info)
 	
 @rpc("any_peer", "reliable")
-func register_player(new_player_info: Dictionary) -> void:
+func _register_player(new_player_info: Dictionary) -> void:
 	var new_player_id := multiplayer.get_remote_sender_id()
 	players[new_player_id] = new_player_info
 	player_connected.emit(new_player_id, new_player_info)
 
-func on_player_disconnected(id: int) -> void:
+func _on_player_disconnected(id: int) -> void:
 	players.erase(id)
 	player_disconnected.emit(id)
 
 
-func on_connected_ok() -> void:
+func _on_connected_ok() -> void:
 	var peer_id := multiplayer.get_unique_id()
 	players[peer_id] = player_info
 	player_connected.emit(peer_id, player_info)
 
 
-func on_connected_fail() -> void:
+func _on_connected_fail() -> void:
 	multiplayer.multiplayer_peer = null
 
 	
-func on_server_disconnected() -> void:
+func _on_server_disconnected() -> void:
 	multiplayer.multiplayer_peer = null
 	players.clear()
 	server_disconnected.emit()

@@ -1,0 +1,46 @@
+[gd_scene load_steps=2 format=3 uid="uid://4w5so0ntdnl"]
+
+[ext_resource type="Script" path="res://scripts/multiplayer/menus/host_button.gd" id="1_kwbgt"]
+
+[node name="Lobby" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HostButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -149.0
+offset_top = -153.0
+offset_right = 151.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 34
+text = "Host game"
+script = ExtResource("1_kwbgt")
+
+[node name="JoinButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -149.0
+offset_top = 41.0
+offset_right = 151.0
+offset_bottom = 201.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 34
+text = "Join game"
+
+[connection signal="button_up" from="HostButton" to="HostButton" method="_on_button_up"]

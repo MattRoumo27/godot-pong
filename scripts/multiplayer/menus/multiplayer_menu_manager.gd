@@ -15,4 +15,4 @@ func _on_host_button_button_up() -> void:
 
 
 func _on_join_button_button_up() -> void:
-	pass # Replace with function body.
+	multiplayer_container.hide()
